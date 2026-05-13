@@ -9,6 +9,8 @@ public class MainMenu : MonoBehaviour
 
     public void QuitGame()
     {
-        GameManager.Instance.QuitGame();
+        Debug.Log("Saiu do jogo");
+
+        Application.Quit();
     }
 }

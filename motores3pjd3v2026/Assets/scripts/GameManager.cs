@@ -15,17 +15,20 @@ public class GameManager : MonoBehaviour
         Gameplay
     }
 
+    // Estado atual
     public GameState currentState;
 
-    // Referência do PlayerInput
+    // Input do jogador
     public PlayerInput playerInput;
 
     private void Awake()
     {
-        // Singleton
+        // Faz existir apenas 1 GameManager
         if (Instance == null)
         {
             Instance = this;
+
+            // Não destrói ao trocar de cena
             DontDestroyOnLoad(gameObject);
         }
         else
@@ -36,13 +39,14 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        // Estado inicial
         ChangeState(GameState.Iniciando);
 
-        // Vai para Splash
+        // Carrega Splash
         LoadScene("Splash");
     }
 
-    // Trocar estado
+    // Troca estado
     public void ChangeState(GameState newState)
     {
         currentState = newState;
@@ -55,7 +59,7 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene(sceneName);
 
-        // Define estados dependendo da cena
+        // Define estado baseado na cena
         switch (sceneName)
         {
             case "MenuPrincipal":
@@ -68,18 +72,19 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // Input do jogador
+    // Conectar input do jogador
     public void AssignPlayerInput(PlayerInput input)
     {
         playerInput = input;
 
-        Debug.Log("Input conectado ao jogador!");
+        Debug.Log("Input conectado!");
     }
 
     // Sair do jogo
     public void QuitGame()
     {
-        Debug.Log("Saindo do jogo...");
+        Debug.Log("Saindo do jogo");
+
         Application.Quit();
     }
 }
