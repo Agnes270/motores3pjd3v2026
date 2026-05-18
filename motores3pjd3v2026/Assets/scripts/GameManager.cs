@@ -39,14 +39,14 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        // Estado inicial
+       
         ChangeState(GameState.Iniciando);
 
-        // Carrega Splash
+      
         LoadScene("Splash");
     }
 
-    // Troca estado
+   
     public void ChangeState(GameState newState)
     {
         currentState = newState;
@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour
         Debug.Log("Estado atual: " + currentState);
     }
 
-    // Carregar cenas
+    
     public void LoadScene(string sceneName)
     {
         SceneManager.LoadScene(sceneName);
@@ -72,7 +72,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // Conectar input do jogador
+    
     public void AssignPlayerInput(PlayerInput input)
     {
         playerInput = input;
@@ -80,7 +80,7 @@ public class GameManager : MonoBehaviour
         Debug.Log("Input conectado!");
     }
 
-    // Sair do jogo
+    
     public void QuitGame()
     {
         Debug.Log("Saindo do jogo");
