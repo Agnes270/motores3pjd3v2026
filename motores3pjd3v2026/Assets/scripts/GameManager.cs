@@ -4,10 +4,10 @@ using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour
 {
-    // Singleton
+   
     public static GameManager Instance;
 
-    // Estados do jogo
+    
     public enum GameState
     {
         Iniciando,
@@ -15,20 +15,20 @@ public class GameManager : MonoBehaviour
         Gameplay
     }
 
-    // Estado atual
+   
     public GameState currentState;
 
-    // Input do jogador
+    
     public PlayerInput playerInput;
 
     private void Awake()
     {
-        // Faz existir apenas 1 GameManager
+        
         if (Instance == null)
         {
             Instance = this;
 
-            // Não destrói ao trocar de cena
+           
             DontDestroyOnLoad(gameObject);
         }
         else
@@ -59,7 +59,7 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene(sceneName);
 
-        // Define estado baseado na cena
+       
         switch (sceneName)
         {
             case "MenuPrincipal":
@@ -68,6 +68,7 @@ public class GameManager : MonoBehaviour
 
             case "GetStarted_Scene":
                 ChangeState(GameState.Gameplay);
+                SceneManager.LoadScene("GUI", LoadSceneMode.Additive);
                 break;
         }
     }
