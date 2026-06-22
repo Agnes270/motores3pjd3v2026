@@ -1,13 +1,12 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Player : Personagem
-
 {
     private SpriteRenderer spriteRenderer;
     private Animator animator;
-  
+
     private bool andando = false;
-    
 
     void Start()
     {
@@ -16,29 +15,23 @@ public class Player : Personagem
     }
 
     void Update()
-
     {
-
         andando = false;
 
-        if (Input.GetKey(KeyCode.D))
-
+        if (Keyboard.current.dKey.isPressed)
         {
-            gameObject.transform.position += new Vector3(getVelocidade() * Time.deltaTime, 0, 0);
-            spriteRenderer.flipX = false; // ADICIONADO: vira para a direita
+            transform.position += new Vector3(getVelocidade() * Time.deltaTime, 0, 0);
+            spriteRenderer.flipX = false;
             andando = true;
         }
 
-        if (Input.GetKey(KeyCode.A))
-
+        if (Keyboard.current.aKey.isPressed)
         {
-            gameObject.transform.position -= new Vector3(getVelocidade() * Time.deltaTime, 0, 0);
-            spriteRenderer.flipX = true; // ADICIONADO: vira para a esquerda
+            transform.position -= new Vector3(getVelocidade() * Time.deltaTime, 0, 0);
+            spriteRenderer.flipX = true;
             andando = true;
-
         }
 
         animator.SetBool("Andando", andando);
     }
-
 }

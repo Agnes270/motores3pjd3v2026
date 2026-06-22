@@ -66,7 +66,7 @@ public class GameManager : MonoBehaviour
                 ChangeState(GameState.MenuPrincipal);
                 break;
 
-            case "GetStarted_Scene":
+            case "Gameplay":
                 ChangeState(GameState.Gameplay);
                 SceneManager.LoadScene("GUI", LoadSceneMode.Additive);
                 break;
