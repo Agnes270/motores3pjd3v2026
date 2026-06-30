@@ -7,6 +7,9 @@ public class PlayerCoins : MonoBehaviour
     public void CollectCoin()
     {
         coinCount++;
+
+        Debug.Log("Moeda coletada: " + coinCount);
+
         PlayerObserverManager.NotifyCoinCollected(coinCount);
     }
 }
