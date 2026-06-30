@@ -6,8 +6,7 @@ public class Coin : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            PlayerCoins playerCoins =
-                other.GetComponent<PlayerCoins>();
+            PlayerCoins playerCoins = other.GetComponent<PlayerCoins>();
 
             if (playerCoins != null)
             {

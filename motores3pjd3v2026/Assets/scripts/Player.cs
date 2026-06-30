@@ -1,37 +1,27 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class Player : Personagem
 {
-    private SpriteRenderer spriteRenderer;
-    private Animator animator;
-
-    private bool andando = false;
-
-    void Start()
-    {
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        animator = GetComponent<Animator>();
-    }
-
     void Update()
     {
-        andando = false;
-
-        if (Keyboard.current.dKey.isPressed)
+        if (Input.GetKey(KeyCode.D))
         {
-            transform.position += new Vector3(getVelocidade() * Time.deltaTime, 0, 0);
-            spriteRenderer.flipX = false;
-            andando = true;
+            transform.position += Vector3.right * getVelocidade() * Time.deltaTime;
         }
 
-        if (Keyboard.current.aKey.isPressed)
+        if (Input.GetKey(KeyCode.A))
         {
-            transform.position -= new Vector3(getVelocidade() * Time.deltaTime, 0, 0);
-            spriteRenderer.flipX = true;
-            andando = true;
+            transform.position += Vector3.left * getVelocidade() * Time.deltaTime;
         }
 
-        animator.SetBool("Andando", andando);
+        if (Input.GetKey(KeyCode.W))
+        {
+            transform.position += Vector3.forward * getVelocidade() * Time.deltaTime;
+        }
+
+        if (Input.GetKey(KeyCode.S))
+        {
+            transform.position += Vector3.back * getVelocidade() * Time.deltaTime;
+        }
     }
 }

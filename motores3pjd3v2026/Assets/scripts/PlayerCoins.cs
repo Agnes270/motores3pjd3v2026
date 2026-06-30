@@ -7,7 +7,6 @@ public class PlayerCoins : MonoBehaviour
     public void CollectCoin()
     {
         coinCount++;
-
         PlayerObserverManager.NotifyCoinCollected(coinCount);
     }
 }

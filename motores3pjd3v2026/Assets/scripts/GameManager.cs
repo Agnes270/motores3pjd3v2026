@@ -4,10 +4,8 @@ using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour
 {
-   
     public static GameManager Instance;
 
-    
     public enum GameState
     {
         Iniciando,
@@ -15,20 +13,15 @@ public class GameManager : MonoBehaviour
         Gameplay
     }
 
-   
     public GameState currentState;
 
-    
     public PlayerInput playerInput;
 
     private void Awake()
     {
-        
         if (Instance == null)
         {
             Instance = this;
-
-           
             DontDestroyOnLoad(gameObject);
         }
         else
@@ -39,53 +32,42 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-       
         ChangeState(GameState.Iniciando);
-
-      
         LoadScene("Splash");
     }
 
-   
     public void ChangeState(GameState newState)
     {
         currentState = newState;
-
         Debug.Log("Estado atual: " + currentState);
     }
 
-    
     public void LoadScene(string sceneName)
     {
         SceneManager.LoadScene(sceneName);
 
-       
         switch (sceneName)
         {
             case "MenuPrincipal":
                 ChangeState(GameState.MenuPrincipal);
                 break;
 
-            case "Gameplay":
+            case "GetStarted_Scene":
                 ChangeState(GameState.Gameplay);
                 SceneManager.LoadScene("GUI", LoadSceneMode.Additive);
                 break;
         }
     }
 
-    
     public void AssignPlayerInput(PlayerInput input)
     {
         playerInput = input;
-
         Debug.Log("Input conectado!");
     }
 
-    
     public void QuitGame()
     {
         Debug.Log("Saindo do jogo");
-
         Application.Quit();
     }
 }
