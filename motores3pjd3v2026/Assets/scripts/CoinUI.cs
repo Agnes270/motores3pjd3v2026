@@ -8,15 +8,16 @@ public class CoinUI : MonoBehaviour
     private void Start()
     {
         coinText.text = "Moedas: 0";
-        PlayerObserverManager.OnCoinCollected += UpdateCoins;
+
+        PlayerObserverManager.OnCoinCountChanged += UpdateCoins;
     }
 
     private void OnDestroy()
     {
-        PlayerObserverManager.OnCoinCollected -= UpdateCoins;
+        PlayerObserverManager.OnCoinCountChanged -= UpdateCoins;
     }
 
-    void UpdateCoins(int amount)
+    private void UpdateCoins(int amount)
     {
         coinText.text = "Moedas: " + amount;
     }

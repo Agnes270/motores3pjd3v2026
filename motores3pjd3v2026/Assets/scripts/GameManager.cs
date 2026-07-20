@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
 
     public void LoadScene(string sceneName)
     {
-        // Carrega a cena principal
+        
         SceneManager.LoadScene(sceneName);
 
         switch (sceneName)
@@ -56,7 +56,7 @@ public class GameManager : MonoBehaviour
             case "GetStarted_Scene":
                 ChangeState(GameState.Gameplay);
 
-                // Carrega a GUI junto
+                
                 SceneManager.LoadScene("GUI", LoadSceneMode.Additive);
                 break;
         }
