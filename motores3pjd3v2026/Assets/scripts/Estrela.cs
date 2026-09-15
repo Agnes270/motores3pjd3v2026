@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Coin : MonoBehaviour
+public class Estrela : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
@@ -9,10 +9,11 @@ public class Coin : MonoBehaviour
 
         PlayerCoins playerCoins = other.GetComponentInParent<PlayerCoins>();
 
-        if (playerCoins != null)
-        {
-            playerCoins.CollectCoin();
-            Destroy(gameObject);
-        }
+        if (playerCoins == null)
+            return;
+
+        playerCoins.ColetarEstrela();
+
+        Destroy(gameObject);
     }
 }

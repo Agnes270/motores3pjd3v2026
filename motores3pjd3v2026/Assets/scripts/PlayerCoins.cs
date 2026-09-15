@@ -2,22 +2,31 @@ using UnityEngine;
 
 public class PlayerCoins : MonoBehaviour
 {
-    public int coinCount = 0;
+    [SerializeField] private int playerIndex = 1;
 
-    private void OnEnable()
-    {
-        PlayerObserverManager.OnCoinCollected += CollectCoin;
-    }
+    private int coinCount = 0;
+    private int estrelaCount = 0;
 
-    private void OnDisable()
-    {
-        PlayerObserverManager.OnCoinCollected -= CollectCoin;
-    }
-
-    private void CollectCoin()
+    public void CollectCoin()
     {
         coinCount++;
 
-        PlayerObserverManager.NotifyCoinCountChanged(coinCount);
+        Player player = GetComponent<Player>();
+
+        if (player != null)
+        {
+            player.AumentarVelocidade();
+        }
+
+        PlayerObserverManager.NotifyCoinCountChanged(playerIndex, coinCount);
+
+        Debug.Log("Jogador " + playerIndex + " - Moedas: " + coinCount);
+    }
+
+    public void ColetarEstrela()
+    {
+        estrelaCount++;
+
+        Debug.Log("⭐ Jogador " + playerIndex + " - Estrelas: " + estrelaCount);
     }
 }

@@ -1,18 +1,11 @@
-using UnityEngine;
 using System;
 
-public class PlayerObserverManager : MonoBehaviour
+public static class PlayerObserverManager
 {
-    public static Action OnCoinCollected;
-    public static Action<int> OnCoinCountChanged;
+    public static Action<int, int> OnCoinCountChanged;
 
-    public static void NotifyCoinCollected()
+    public static void NotifyCoinCountChanged(int playerIndex, int amount)
     {
-        OnCoinCollected?.Invoke();
-    }
-
-    public static void NotifyCoinCountChanged(int amount)
-    {
-        OnCoinCountChanged?.Invoke(amount);
+        OnCoinCountChanged?.Invoke(playerIndex, amount);
     }
 }

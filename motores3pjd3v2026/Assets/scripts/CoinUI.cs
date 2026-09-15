@@ -1,9 +1,10 @@
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 
 public class CoinUI : MonoBehaviour
 {
-    [SerializeField] private TMP_Text coinText;
+    [SerializeField] private TMP_Text player1CoinText;
+    [SerializeField] private TMP_Text player2CoinText;
 
     private void OnEnable()
     {
@@ -15,8 +16,21 @@ public class CoinUI : MonoBehaviour
         PlayerObserverManager.OnCoinCountChanged -= UpdateCoins;
     }
 
-    private void UpdateCoins(int amount)
+    private void Start()
     {
-        coinText.text = "Moedas: " + amount;
+        player1CoinText.text = "Jogador 1: 0";
+        player2CoinText.text = "Jogador 2: 0";
+    }
+
+    private void UpdateCoins(int playerIndex, int amount)
+    {
+        if (playerIndex == 1)
+        {
+            player1CoinText.text = "Jogador 1: " + amount;
+        }
+        else if (playerIndex == 2)
+        {
+            player2CoinText.text = "Jogador 2: " + amount;
+        }
     }
 }

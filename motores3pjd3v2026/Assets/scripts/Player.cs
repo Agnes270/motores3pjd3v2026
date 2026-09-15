@@ -1,27 +1,61 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Player : Personagem
 {
+    private SpriteRenderer spriteRenderer;
+    private Animator animator;
+
+    private Vector2 movimento;
+    private bool andando = false;
+
+    private float velocidadeExtra = 0f;
+
+    void Start()
+    {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();
+    }
+
+    public void OnMove(InputValue value)
+    {
+        movimento = value.Get<Vector2>();
+    }
+
+    public void AumentarVelocidade()
+    {
+        velocidadeExtra += 1f;
+    }
+
     void Update()
     {
-        if (Input.GetKey(KeyCode.D))
+        Vector3 direcao = new Vector3(
+            movimento.x,
+            0,
+            movimento.y
+        );
+
+        transform.position += direcao *
+                              (getVelocidade() + velocidadeExtra) *
+                              Time.deltaTime;
+
+        andando = movimento != Vector2.zero;
+
+        if (spriteRenderer != null)
         {
-            transform.position += Vector3.right * getVelocidade() * Time.deltaTime;
+            if (movimento.x > 0)
+            {
+                spriteRenderer.flipX = false;
+            }
+            else if (movimento.x < 0)
+            {
+                spriteRenderer.flipX = true;
+            }
         }
 
-        if (Input.GetKey(KeyCode.A))
+        if (animator != null)
         {
-            transform.position += Vector3.left * getVelocidade() * Time.deltaTime;
-        }
-
-        if (Input.GetKey(KeyCode.W))
-        {
-            transform.position += Vector3.forward * getVelocidade() * Time.deltaTime;
-        }
-
-        if (Input.GetKey(KeyCode.S))
-        {
-            transform.position += Vector3.back * getVelocidade() * Time.deltaTime;
+            animator.SetBool("Andando", andando);
         }
     }
 }
