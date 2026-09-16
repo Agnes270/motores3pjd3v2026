@@ -11,7 +11,7 @@ public class PlayerCoins : MonoBehaviour
     {
         coinCount++;
 
-        Player player = GetComponent<Player>();
+        Player player = GetComponentInParent<Player>();
 
         if (player != null)
         {
@@ -27,6 +27,14 @@ public class PlayerCoins : MonoBehaviour
     {
         estrelaCount++;
 
-        Debug.Log("⭐ Jogador " + playerIndex + " - Estrelas: " + estrelaCount);
+        PlayerObserverManager.NotifyStarCountChanged(
+            playerIndex,
+            estrelaCount
+        );
+
+        Debug.Log(
+            "Jogador " + playerIndex +
+            " - Estrelas: " + estrelaCount
+        );
     }
 }

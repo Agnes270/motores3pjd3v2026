@@ -4,17 +4,17 @@ using UnityEngine.InputSystem;
 public class Player : Personagem
 {
     private SpriteRenderer spriteRenderer;
-    private Animator animator;
 
     private Vector2 movimento;
-    private bool andando = false;
 
+    // Aumenta 2 pontos a cada moeda
     private float velocidadeExtra = 0f;
 
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        animator = GetComponent<Animator>();
+
+        Debug.Log("Jogador iniciado. Velocidade base: " + getVelocidade());
     }
 
     public void OnMove(InputValue value)
@@ -24,22 +24,29 @@ public class Player : Personagem
 
     public void AumentarVelocidade()
     {
-        velocidadeExtra += 1f;
+        velocidadeExtra += 2f;
+
+        Debug.Log(
+            "VELOCIDADE AUMENTOU! Base: "
+            + getVelocidade()
+            + " | Extra: "
+            + velocidadeExtra
+            + " | FINAL: "
+            + (getVelocidade() + velocidadeExtra)
+        );
     }
 
     void Update()
     {
         Vector3 direcao = new Vector3(
             movimento.x,
-            0,
+            0f,
             movimento.y
         );
 
-        transform.position += direcao *
-                              (getVelocidade() + velocidadeExtra) *
-                              Time.deltaTime;
+        float velocidadeFinal = getVelocidade() + velocidadeExtra;
 
-        andando = movimento != Vector2.zero;
+        transform.position += direcao * velocidadeFinal * Time.deltaTime;
 
         if (spriteRenderer != null)
         {
@@ -51,11 +58,6 @@ public class Player : Personagem
             {
                 spriteRenderer.flipX = true;
             }
-        }
-
-        if (animator != null)
-        {
-            animator.SetBool("Andando", andando);
         }
     }
 }
