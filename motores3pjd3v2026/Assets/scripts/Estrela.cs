@@ -32,12 +32,12 @@ public class Estrela : MonoBehaviour
 
         Debug.Log(
             "ESTRELAS COLETADAS NO TOTAL: " +
-            estrelasColetadas + "/5"
+            estrelasColetadas + "/6"
         );
 
         Destroy(gameObject);
 
-        if (estrelasColetadas >= 5)
+        if (estrelasColetadas >= 6)
         {
             WinnerManager winnerManager =
                 FindFirstObjectByType<WinnerManager>();

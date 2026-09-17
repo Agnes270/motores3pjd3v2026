@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class Coin : MonoBehaviour
 {
+    private bool foiColetada = false;
+
     private void Start()
     {
         Debug.LogWarning("========== COIN ESTÁ FUNCIONANDO ==========");
@@ -9,15 +11,25 @@ public class Coin : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.LogWarning("========== MOEDA TOCOU EM: " + other.name + " ==========");
+        if (foiColetada)
+            return;
+
+        Debug.LogWarning(
+            "========== MOEDA TOCOU EM: " +
+            other.name +
+            " =========="
+        );
 
         PlayerCoins playerCoins = other.GetComponent<PlayerCoins>();
 
         if (playerCoins != null)
         {
+            foiColetada = true;
+
             Debug.LogWarning(
                 "========== PLAYER COINS ENCONTRADO NO: " +
-                playerCoins.gameObject.name + " =========="
+                playerCoins.gameObject.name +
+                " =========="
             );
 
             playerCoins.CollectCoin();
@@ -28,7 +40,8 @@ public class Coin : MonoBehaviour
         {
             Debug.LogWarning(
                 "========== ESSE OBJETO NÃO TEM PLAYER COINS: " +
-                other.name + " =========="
+                other.name +
+                " =========="
             );
         }
     }
