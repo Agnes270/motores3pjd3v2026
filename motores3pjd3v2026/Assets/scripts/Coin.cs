@@ -11,15 +11,25 @@ public class Coin : MonoBehaviour
     {
         Debug.LogWarning("========== MOEDA TOCOU EM: " + other.name + " ==========");
 
-        PlayerCoins playerCoins = other.GetComponentInParent<PlayerCoins>();
+        PlayerCoins playerCoins = other.GetComponent<PlayerCoins>();
 
         if (playerCoins != null)
         {
-            Debug.LogWarning("========== PLAYERCOINS ENCONTRADO ==========");
+            Debug.LogWarning(
+                "========== PLAYER COINS ENCONTRADO NO: " +
+                playerCoins.gameObject.name + " =========="
+            );
 
             playerCoins.CollectCoin();
 
             Destroy(gameObject);
+        }
+        else
+        {
+            Debug.LogWarning(
+                "========== ESSE OBJETO NÃO TEM PLAYER COINS: " +
+                other.name + " =========="
+            );
         }
     }
 }

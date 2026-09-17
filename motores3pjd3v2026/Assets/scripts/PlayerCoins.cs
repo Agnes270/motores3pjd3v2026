@@ -18,9 +18,15 @@ public class PlayerCoins : MonoBehaviour
             player.AumentarVelocidade();
         }
 
-        PlayerObserverManager.NotifyCoinCountChanged(playerIndex, coinCount);
+        PlayerObserverManager.NotifyCoinCountChanged(
+            playerIndex,
+            coinCount
+        );
 
-        Debug.Log("Jogador " + playerIndex + " - Moedas: " + coinCount);
+        Debug.Log(
+            "Jogador " + playerIndex +
+            " - Moedas: " + coinCount
+        );
     }
 
     public void ColetarEstrela()
@@ -36,5 +42,10 @@ public class PlayerCoins : MonoBehaviour
             "Jogador " + playerIndex +
             " - Estrelas: " + estrelaCount
         );
+    }
+
+    public int GetEstrelaCount()
+    {
+        return estrelaCount;
     }
 }

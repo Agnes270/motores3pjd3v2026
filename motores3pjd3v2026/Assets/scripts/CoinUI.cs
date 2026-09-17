@@ -5,6 +5,7 @@ public class CoinUI : MonoBehaviour
 {
     [SerializeField] private TMP_Text player1CoinText;
     [SerializeField] private TMP_Text player2CoinText;
+    [SerializeField] private TMP_Text winnerText;
 
     private int player1Coins = 0;
     private int player2Coins = 0;
@@ -16,18 +17,25 @@ public class CoinUI : MonoBehaviour
     {
         PlayerObserverManager.OnCoinCountChanged += UpdateCoins;
         PlayerObserverManager.OnStarCountChanged += UpdateStars;
+        PlayerObserverManager.OnWinnerDecided += MostrarVencedor;
     }
 
     private void OnDisable()
     {
         PlayerObserverManager.OnCoinCountChanged -= UpdateCoins;
         PlayerObserverManager.OnStarCountChanged -= UpdateStars;
+        PlayerObserverManager.OnWinnerDecided -= MostrarVencedor;
     }
 
     private void Start()
     {
         AtualizarPlayer1();
         AtualizarPlayer2();
+
+        if (winnerText != null)
+        {
+            winnerText.text = "";
+        }
     }
 
     private void UpdateCoins(int playerIndex, int amount)
@@ -77,6 +85,25 @@ public class CoinUI : MonoBehaviour
                 "Jogador 2\n" +
                 "Moedas: " + player2Coins + "\n" +
                 "Estrelas: " + player2Stars;
+        }
+    }
+
+    private void MostrarVencedor(int playerIndex)
+    {
+        if (winnerText == null)
+            return;
+
+        if (playerIndex == 1)
+        {
+            winnerText.text = "Jogador 1 venceu!";
+        }
+        else if (playerIndex == 2)
+        {
+            winnerText.text = "Jogador 2 venceu!";
+        }
+        else
+        {
+            winnerText.text = "Empate!";
         }
     }
 }
